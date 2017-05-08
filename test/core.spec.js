@@ -1,10 +1,14 @@
-import {List, Map} from 'immutable';
-import {expect} from 'chai';
+import { List, Map } from 'immutable';
+import { expect } from 'chai';
 
-import {setEntries, next, vote} from '../src/core';
+import { setEntries, next, vote } from '../src/core';
 
-describe('Testing core.js', () => {
 
+
+
+describe('Testing core functions', () => {
+
+  /* SET ENTRIES */
   describe('setEntries', () => {
     it('adds the entries to the state', () => {
       const state = Map();
@@ -16,6 +20,9 @@ describe('Testing core.js', () => {
     });
   });
 
+
+
+  /* NEXT */
   describe('next', () => {
     it('takes the next two entries under vote', () => {
       const state = Map({
@@ -93,6 +100,8 @@ describe('Testing core.js', () => {
   });
 
 
+
+  /* VOTE */
   describe('vote', () => {
     it('creates a tally for the voted entry', () => {
       const state = Map({
@@ -125,5 +134,4 @@ describe('Testing core.js', () => {
       }));
     });
   });
-
 });

@@ -1,10 +1,14 @@
-import {Map, fromJS} from 'immutable';
-import {expect} from 'chai';
+import { Map, fromJS } from 'immutable';
+import { expect } from 'chai';
 
-import {reducer} from '../src/reducer';
+import { reducer } from '../src/reducer';
+
+
+
 
 describe('Testing reducer.js', () => {
 
+  /* TRY SET ENTRIES */
   it('handles SET_ENTRIES', () => {
     const initState = Map();
     const action = {type: 'SET_ENTRIES', entries: ['Transpotting']};
@@ -15,6 +19,10 @@ describe('Testing reducer.js', () => {
     }));
   });
 
+
+
+
+  /* TRY NEXT */
   it('handles NEXT', () => {
     const initState = fromJS({
       entries: ['Transpotting', '28 days']
@@ -30,6 +38,10 @@ describe('Testing reducer.js', () => {
     }));
   });
 
+
+
+
+  /* TRY VOTE */
   it('handles VOTE', () => {
     const initState = fromJS({
       vote: {
@@ -49,7 +61,11 @@ describe('Testing reducer.js', () => {
     }));
   });
 
-  it('has INITIAL_STATE', () => {
+
+
+
+  /* INIT STATE */
+  it('has initial state', () => {
     const action = {type: 'SET_ENTRIES', entries: ['Transpotting']};
     const nextAction = reducer(undefined, action);
 
@@ -58,6 +74,10 @@ describe('Testing reducer.js', () => {
     }));
   });
   
+
+
+
+  /* CAN SET ACTIONS IN ARRAY */
   it('can be used with Array.reduce()', () => {
     const actions = [
       {type: 'SET_ENTRIES', entries: ['Transpotting', '28 days']},

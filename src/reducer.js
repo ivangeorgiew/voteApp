@@ -1,6 +1,12 @@
-import {setEntries, next, vote, INITIAL_STATE} from './core';
+import { Map } from 'immutable';
 
-export function reducer(state=INITIAL_STATE, action) {
+import { setEntries, next, vote} from './core';
+
+
+
+
+/* REDUCER */
+export function reducer(state = Map(), action) {
   switch(action.type) {
     case 'SET_ENTRIES':
       return setEntries(state, action.entries);
