@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { List, Map } from 'immutable';
 
-describe('immutable.js', () => {
+describe('Testing immutable.js', () => {
 
   /* A NUMBER */
   describe('a number', () => {
