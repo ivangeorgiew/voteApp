@@ -8,7 +8,7 @@
     "test:server": "mocha --compilers js:babel-core/register --require ./test/serverTest/index.js --recursive ./test/serverTest",
     "test:client": "mocha --compilers js:babel-core/register --require ./test/clientTest/index.js --recursive ./test/clientTest",
     "build": "cross-env NODE_ENV=production webpack --config ./webpack.prod.config.js --progress --colors",
-    "server": "babel-node server/index.js",
+    "start": "node server/index.js",
     "dev": "webpack-dev-server --hot --history-api-fallback --open"
   },
   "repository": {
