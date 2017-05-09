@@ -1,7 +1,7 @@
 import { createStore } from 'redux';
 import Server from 'socket.io';
 
-import { reducer } from './reducer';
+import { reducer } from './server/reducer';
 
 
 
