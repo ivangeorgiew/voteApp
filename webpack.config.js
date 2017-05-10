@@ -26,6 +26,11 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin()
   ],
 
+  devServer: {
+    contentBase: './public',
+    hot: true
+  },
+
   module: {
     rules: [
       { test: /\.js?$/,
