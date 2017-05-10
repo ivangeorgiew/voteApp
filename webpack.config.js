@@ -5,7 +5,7 @@ const webpack = require('webpack')
 
 
 module.exports = {
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
 
   entry: [
     'babel-polyfill',
@@ -18,18 +18,18 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'public'),
     filename: 'bundle.js',
-    publicPath: '/public/'
+    publicPath: '/'
+  },
+
+  devServer: {
+    hot: true,
+    contentBase: path.join(__dirname, 'public')
   },
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ],
-
-  devServer: {
-    contentBase: './public',
-    hot: true
-  },
 
   module: {
     rules: [
