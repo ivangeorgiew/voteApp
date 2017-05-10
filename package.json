@@ -5,10 +5,9 @@
   "author": "Ivan Georgiev",
   "license": "MIT",
   "scripts": {
-    "test:server": "mocha --compilers js:babel-core/register --require ./test/serverTest/index.js --recursive ./test/serverTest",
-    "test:client": "mocha --compilers js:babel-core/register --require ./test/clientTest/index.js --recursive ./test/clientTest",
+    "test": "mocha --compilers js:babel-core/register --require ./test/index.js --recursive",
     "build": "cross-env NODE_ENV=production webpack --config ./webpack.prod.config.js --progress --colors",
-    "start": "node server/index.js",
+    "start": "babel-node server.js",
     "dev": "webpack-dev-server --hot --history-api-fallback --open"
   },
   "repository": {
@@ -35,6 +34,7 @@
     "node-sass": "^4.5.2",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
+    "react-addons-test-utils": "^15.5.1",
     "react-dom": "^15.5.4",
     "react-hot-loader": "^3.0.0-beta.6",
     "redux": "^3.6.0",

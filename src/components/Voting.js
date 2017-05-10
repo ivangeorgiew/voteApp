@@ -6,9 +6,10 @@ import PropTypes from 'prop-types';
 
 /* VOTING COMP */
 function Voting(props) {
+
   function getButtons(pair) {
-    if(pair === []) 
-      return 'No pairs';
+    if(pair.length < 1)
+      return (<h1>No Entries</h1>);
 
     return pair.map(entry =>
       <button key={entry}>
