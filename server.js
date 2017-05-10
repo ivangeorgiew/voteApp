@@ -11,13 +11,14 @@ import { reducer } from './server/reducer';
 /* EXPRESS SETUP */
 const port = process.env.PORT || 8080;
 const app = express();
+const publicPath = path.join(__dirname, 'public');
 
 //use folder public as static
-app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use(express.static(publicPath));
 
 //router
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, 'index.html'))
+  res.sendFile(path.join(publicPath, 'index.html'))
 });
 
 //const for passing to socket.io 
