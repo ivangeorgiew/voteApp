@@ -24,11 +24,12 @@ body {
 
   background-color: #673AB7;
   border-width: 0;
+  transition: 0.5s;
 }
 .voting button:first-child {
   border-bottom: 1px solid white;
 }
-.voting button:active {
+.voting button:focus {
   background-color: white;
   color: #311B92;
 }

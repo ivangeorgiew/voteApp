@@ -8,8 +8,6 @@ module.exports = {
   devtool: 'inline-source-map',
 
   entry: [
-    'babel-polyfill',
-    'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
     './src/index'
@@ -23,7 +21,8 @@ module.exports = {
 
   devServer: {
     hot: true,
-    contentBase: path.join(__dirname, 'public')
+    contentBase: path.join(__dirname, 'public'),
+    publicPath: '/'
   },
 
   plugins: [
@@ -39,7 +38,7 @@ module.exports = {
       },
       { test: /\.scss?$/,
         loader: 'style-loader!css-loader!sass-loader',
-        include: path.join(__dirname, 'src', 'styles') },
+        include: path.join(__dirname, 'src') },
       { test: /\.png$/,
         loader: 'file-loader' },
       { test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
