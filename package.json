@@ -8,7 +8,8 @@
     "test": "mocha --compilers js:babel-core/register  --recursive",
     "build": "cross-env NODE_ENV=production webpack --config ./webpack.prod.config.js --progress --colors",
     "start": "babel-node server.js",
-    "dev": "webpack-dev-server --history-api-fallback --open"
+    "dev": "webpack-dev-server --history-api-fallback --open",
+    "server": "babel-node devServer.js"
   },
   "repository": {
     "type": "git",
