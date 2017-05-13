@@ -37,12 +37,16 @@ const store = createStore(reducer);
 
 //gets state on it being changed
 store.subscribe(() => {
+  console.log('SUBSCRIBTION!');
+  console.log(store.getState());
   io.emit('state', store.getState())
 });
 
 io.on('connection', (socket) => {
+  console.log('CONNECTION!');
   //emits state after connecting
   socket.emit('state', store.getState());
+
   //when any user does an action
   socket.on('action', store.dispatch.bind(store));
 });
@@ -50,24 +54,42 @@ io.on('connection', (socket) => {
 
 
 
-/* INITIAL STATE */
+/* TEST TO CHANGE STATE */
+
+//
+//REMOVE WHEN MOVING TO PRODUCTION
+//
+
 const entries = [
-  "Shallow Grave",
-  "Trainspotting",
-  "A Life Less Ordinary",
-  "The Beach",
-  "28 Days Later",
-  "Millions",
-  "Sunshine",
-  "Slumdog Millionaire",
-  "127 Hours",
   "Trance",
   "Steve Jobs"
 ];
 
 store.dispatch({
   type: 'SET_ENTRIES',
-  entries: entries
+  entries 
+});
+store.dispatch({
+  type: 'VOTE',
+  entry: 'Trance'
+});
+store.dispatch({
+  type: 'VOTE',
+  entry: 'Steve Jobs'
+});
+store.dispatch({
+  type: 'VOTE',
+  entry: 'Steve Jobs'
+});
+store.dispatch({
+  type: 'NEXT'
+});
+store.dispatch({
+  type: 'SET_ENTRIES',
+  entries 
+});
+store.dispatch({
+  type: 'NEXT'
 });
 store.dispatch({
   type: 'NEXT'

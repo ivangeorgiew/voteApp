@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import * as actionCreators from '../actionCreators';
 import '../index.scss';
 
 export { winner };
-export default connect(mapStateToProps)(Voting);
+export default connect(mapStateToProps, actionCreators)(Voting);
 
 
 
@@ -23,10 +24,11 @@ function winner(title) {
 
 /* MAP STATE TO PROPS */
 function mapStateToProps(state) {
+  console.log('mapVoting', state);
   return {
-    pair: state.vote.pair || [],
-    hasVoted: state.hasVoted || '',
-    winner: state.winner || ''
+    pair: state.vote.pair,
+    hasVoted: state.hasVoted,
+    winner: state.winner
   }
 }
 

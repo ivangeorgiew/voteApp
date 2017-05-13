@@ -17,5 +17,5 @@ function vote(entry) {
   return {
     type: 'VOTE',
     entry
-  }
+  };
 }

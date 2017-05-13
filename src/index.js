@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter, Route } from 'react-router-dom';
-import { applyMiddleware, createStore } from 'redux';
+import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import io from 'socket.io-client';
 
@@ -25,7 +25,7 @@ socket.on('state', state => {
 
 
 /* RENDER */
-function render(props={}) {
+function render() {
   return ReactDOM.render(
     <Provider store={store}>
       <HashRouter>

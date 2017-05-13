@@ -14,7 +14,12 @@ describe('Testing core functions', () => {
       const nextState = setEntries(state, entries);
 
       expect(nextState).to.eql({
-        entries: ['Trainspotting', '127 hours']
+        entries: ['Trainspotting', '127 hours'],
+        vote: {
+          pair: ['Trainspotting', '127 hours'],
+          tally: {'Trainspotting': 0, '127 hours': 0}
+        },
+        winner: ''
       });
     });
   });
@@ -29,9 +34,6 @@ describe('Testing core functions', () => {
       };
       const nextState = next(state);
 
-      expect(state).to.eql({
-        entries: ['Trainspotting', '28 days', 'Sunshine']
-      });
       expect(nextState).to.eql({
         entries: ['Sunshine'],
         vote: {
