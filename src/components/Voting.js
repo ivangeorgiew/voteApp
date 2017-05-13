@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import '../index.scss';
 
 export { winner };
-export default Voting;
+export default connect(mapStateToProps)(Voting);
 
 
 
@@ -20,9 +21,21 @@ function winner(title) {
 
 
 
+/* MAP STATE TO PROPS */
+function mapStateToProps(state) {
+  return {
+    pair: state.vote.pair || [],
+    hasVoted: state.hasVoted || '',
+    winner: state.winner || ''
+  }
+}
+
+
+
+
 /* VOTING COMP */
 Voting.propTypes = {
-  pair: PropTypes.array.isRequired, 
+  pair: PropTypes.array, 
   hasVoted: PropTypes.string,
   winner: PropTypes.string
 };
@@ -41,7 +54,7 @@ function Voting(props) {
       >
         <h1>{entry}</h1>
         {props.hasVoted === entry ?
-          <div className='label'>Voted</div> :
+          <div>Voted</div> :
           null
         }
       </button>

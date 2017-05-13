@@ -1,26 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter, Route } from 'react-router-dom';
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import { Provider } from 'react-redux';
+import io from 'socket.io-client';
+
 import { reducer } from './reducer';
 import './index.scss';
-
 import Voting from './components/Voting';
 import Results from './components/Results';
 
 
 
 
+/* STORE AND SOCKET */
+const socket = io(`${location.protocol}//${location.hostname}:8090`);
 const store = createStore(reducer);
 
-store.dispatch({
-  type: 'SET_STATE',
-  state: {
-    vote: {
-      pair: ['Sunshine', '28 days'],
-      tally: { Sunshine: 2 }
-    }
-  }
+socket.on('state', state => {
+  store.dispatch({type: 'SET_STATE', state})
 });
 
 
@@ -29,25 +27,16 @@ store.dispatch({
 /* RENDER */
 function render(props={}) {
   return ReactDOM.render(
-    <HashRouter>
-      <div>
-        <Route exact path='/' component={() => 
-          <Voting {...props}/>
-        }/>
-        <Route path='/results' component={() =>
-          <Results {...props}/>   
-        }/>
-      </div>
-    </HashRouter>,
+    <Provider store={store}>
+      <HashRouter>
+        <div>
+          <Route exact path='/' component={Voting}/>
+          <Route path='/results' component={Results}/>
+        </div>
+      </HashRouter>
+    </Provider>,
     document.getElementById('root')
   );
 }
 
-render({
-  pair: ['Bla', '28 days'],
-  tally: {
-    'Bla': 5,
-    '28 days': 4
-  },
-  winner: 'Bla'
-});
+render();

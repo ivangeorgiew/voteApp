@@ -1,13 +1,33 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import '../index.scss';
 import { winner } from './Voting';
 
-export default Results;
+export default connect(mapStateToProps)(Results);
+
+
+
+
+/* MAP STATE TO PROPS */
+function mapStateToProps(state) {
+  return {
+    pair: state.vote.pair || [],
+    tally: state.vote.tally || {},
+    winner: state.winner || ''
+  }
+}
 
 
 
 
 /* RESULTS COMP */
+Results.propTypes = {
+  pair: PropTypes.array,
+  tally: PropTypes.object,
+  winner: PropTypes.string
+}
+
 function Results(props) {
 
   /* GIVE VOTES */

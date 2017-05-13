@@ -53,7 +53,7 @@ describe('Testing reducer.js', () => {
     expect(nextState).to.eql({
       vote: {
         pair: ['Transpotting', '28 days'],
-        tally: {Transpotting: 1}
+        tally: {'Transpotting': 1, '28 days': 0}
       },
       entries: []
     });

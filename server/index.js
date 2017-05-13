@@ -3,47 +3,46 @@ import SocketIO from 'socket.io';
 import path from 'path';
 import express from 'express';
 
-import { reducer } from './server/reducer';
+import { reducer } from './reducer';
 
 
 
 
 /* EXPRESS SETUP */
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 const app = express();
-const publicPath = path.join(__dirname, 'public');
+const publicPath = path.join(__dirname, '../public');
 
 //use folder public as static
 app.use(express.static(publicPath));
 
-//router
-app.get('/', function(req, res) {
+//home router
+app.get('/', (req, res) =>
   res.sendFile(path.join(publicPath, 'index.html'))
-});
-
-//const for passing to socket.io 
-const server = app.listen(port, (err) => {
-  if(err)
-    return console.log(err);
-
-  console.log(`Listening at http://localhost:${port}`)
-});
+);
 
 
 
 
 /* INITIALIZING SERVER */
+const server = app.listen(port, (err) => {
+  if(err)
+    return console.log(err);
+  return console.log(`Listening at http://localhost:${port}`)
+});
+
 const io = new SocketIO(server).attach(8090);
+
 const store = createStore(reducer);
 
 //gets state on it being changed
-store.subscribe(
-  () => io.emit('state', store.getState().toJS())
-);
+store.subscribe(() => {
+  io.emit('state', store.getState())
+});
 
 io.on('connection', (socket) => {
-  //gets state when connected first time
-  socket.emit('state', store.getState().toJS());
+  //emits state after connecting
+  socket.emit('state', store.getState());
   //when any user does an action
   socket.on('action', store.dispatch.bind(store));
 });
@@ -51,7 +50,7 @@ io.on('connection', (socket) => {
 
 
 
-/* TESTING */
+/* INITIAL STATE */
 const entries = [
   "Shallow Grave",
   "Trainspotting",

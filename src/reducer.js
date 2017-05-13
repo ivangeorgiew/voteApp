@@ -4,13 +4,14 @@ export { reducer };
 
 
 function setState(state, newState) {
-  return state.merge(newState);
+  return Object.assign({}, state, newState);
 }
 
 
 
 
-function reducer(state={}, action) {
+function reducer(state = {vote: {}}, action) {
+  console.log(state, action.state);
   switch(action.type) {
     case 'SET_STATE':
       return setState(state, action.state);

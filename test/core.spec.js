@@ -110,7 +110,8 @@ describe('Testing core functions', () => {
       expect(nextState).to.eql({
         pair: ['Trainspotting', '28 days'],
         tally: {
-          'Trainspotting': 1
+          'Trainspotting': 1,
+          '28 days': 0
         },
       });
     });

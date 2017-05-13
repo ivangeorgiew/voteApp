@@ -1,2 +1,3 @@
-# voteServer
-The server side for a react-redux voting app.
+# VoteApp
+
+A react-redux voting app.

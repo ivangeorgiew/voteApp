@@ -5,7 +5,7 @@ import { reducer } from '../server/reducer';
 
 
 
-describe('Testing server.js', () => {
+describe('Testing server', () => {
 
   /* TRY REDUX STORE */
   it('works with store from Redux', () => {
