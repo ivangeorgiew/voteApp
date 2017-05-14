@@ -2,6 +2,7 @@
   "name": "voteApp",
   "version": "1.0.0",
   "description": "A react-redux voting app.",
+  "main": "src/index.js",
   "author": "Ivan Georgiev",
   "license": "MIT",
   "scripts": {
@@ -41,6 +42,7 @@
     "socket.io": "^1.7.4",
     "socket.io-client": "^2.0.1",
     "style-loader": "^0.16.1",
+    "uglify-js": "^3.0.4",
     "url-loader": "^0.5.8",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.2"

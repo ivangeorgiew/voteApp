@@ -35,14 +35,16 @@ module.exports = {
     rules: [
       { test: /\.js?$/,
         loader: 'babel-loader',
-        include: path.join(__dirname, 'src') },
+        exclude: /node_modules/ },
       { test: /\.scss?$/,
         loader: 'style-loader!css-loader!sass-loader',
-        include: path.join(__dirname, 'src') },
+        exclude: /node_modules/ },
       { test: /\.png$/,
-        loader: 'file-loader' },
+        loader: 'file-loader' ,
+        exclude: /node_modules/ },
       { test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        loader: 'file-loader'}
+        loader: 'file-loader',
+        exclude: /node_modules/ },
     ]
   }
 }

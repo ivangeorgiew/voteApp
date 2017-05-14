@@ -68,7 +68,6 @@ function next(state) {
   copy.vote.pair = entries.slice(0, 2);
   copy.vote.tally = { [entries[0]]: 0, [entries[1]]: 0 };
 
-
   return Object.assign({}, state, copy);
 }
 
