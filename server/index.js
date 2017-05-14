@@ -2,7 +2,6 @@ import { createStore } from 'redux';
 import SocketIO from 'socket.io';
 import path from 'path';
 import express from 'express';
-
 import { reducer } from './reducer';
 
 
@@ -28,6 +27,7 @@ app.get('/', (req, res) =>
 const server = app.listen(port, (err) => {
   if(err)
     return console.log(err);
+
   return console.log(`Listening at http://localhost:${port}`)
 });
 
@@ -54,43 +54,31 @@ io.on('connection', (socket) => {
 
 
 
-/* TEST TO CHANGE STATE */
-
-//
-//REMOVE WHEN MOVING TO PRODUCTION
-//
-
-const entries = [
-  "Trance",
-  "Steve Jobs"
-];
-
+/* FOR TESTS
 store.dispatch({
-  type: 'SET_ENTRIES',
-  entries 
+  type: 'SET_STATE',
+  state: { 
+    entries: [],
+    vote: {
+      pair: ['A', 'B'],
+      tally: {'A': 0, 'B': 0}
+    },
+    winner: ''
+  }
 });
 store.dispatch({
   type: 'VOTE',
-  entry: 'Trance'
+  entry: 'A'
 });
 store.dispatch({
   type: 'VOTE',
-  entry: 'Steve Jobs'
+  entry: 'A'
 });
 store.dispatch({
   type: 'VOTE',
-  entry: 'Steve Jobs'
+  entry: 'B'
 });
 store.dispatch({
   type: 'NEXT'
 });
-store.dispatch({
-  type: 'SET_ENTRIES',
-  entries 
-});
-store.dispatch({
-  type: 'NEXT'
-});
-store.dispatch({
-  type: 'NEXT'
-});
+*/

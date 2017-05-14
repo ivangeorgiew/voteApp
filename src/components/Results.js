@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import * as actions from '../actions';
 import '../index.scss';
 import { winner } from './Voting';
 
-export default connect(mapStateToProps)(Results);
+export default connect(mapStateToProps, actions)(Results);
 
 
 

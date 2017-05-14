@@ -1,5 +1,5 @@
 //export for tests
-export { setEntries, next, vote, reducer };
+export { setState, next, vote, reducer };
 
 
 
@@ -21,36 +21,16 @@ const initState = {
     pair: ['Shallow Grave', 'Trainspotting'],
     tally: {'Shallow Grave': 0, 'Trainspotting': 0}
   },
-  winner: ''
+  winner: '',
+  hasVoted: ''
 };
 
 
 
 
 /* SET STATE */
-function setEntries(state, entries) {
-  const copy = Object.assign({}, state);
-
-  if(entries.length > 1) {
-    copy.entries = entries;
-    copy.vote = {
-      pair: [entries[0], entries[1]],
-      tally: {[entries[0]]: 0, [entries[1]]: 0}
-    };
-    copy.winner = '';
-
-    return Object.assign({}, state, copy);
-  }
-
-  if(entries.length === 1) {
-    copy.entries = [];
-    copy.vote = {};
-    copy.winner = entries[0]
-
-    return Object.assign({}, state, copy);
-  }
-  
-  return state;
+function setState(state, newState) {
+  return Object.assign({}, state, newState);
 }
 
 
@@ -76,15 +56,13 @@ function next(state) {
   const entries = copy.entries
   .concat(getWinners());
 
-  const winner = (entries.length === 3) ?
-    entries[2] : '';
-
-  if(winner !== '')
-    return {
+  if(entries.length === 1) {
+    return Object.assign({}, state, {
       entries: [],
       vote: {},
-      winner
-    };
+      winner: entries[0]
+    });
+  }
 
   copy.entries = entries.slice(2);
   copy.vote.pair = entries.slice(0, 2);
@@ -101,7 +79,10 @@ function next(state) {
 function vote(state, entry) {
   const copy = Object.assign({}, state);
 
-  copy.vote.tally[entry]++; 
+  if(copy.vote.tally.hasOwnProperty(entry))
+    copy.vote.tally[entry]++; 
+
+  copy.hasVoted = entry;
 
   return Object.assign({}, state, copy);
 }
@@ -111,8 +92,8 @@ function vote(state, entry) {
 /* REDUCER */
 function reducer(state = initState, action) {
   switch(action.type) {
-    case 'SET_ENTRIES':
-      return setEntries(state, action.entries);
+    case 'SET_STATE':
+      return setState(state, action.state);
     case 'NEXT':
       return next(state);
     case 'VOTE':

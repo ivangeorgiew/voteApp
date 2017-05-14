@@ -1,11 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as actionCreators from '../actionCreators';
+import * as actions from '../actions';
 import '../index.scss';
 
 export { winner };
-export default connect(mapStateToProps, actionCreators)(Voting);
+export default connect(mapStateToProps, actions)(Voting);
+
+
+
+
+/* MAP STATE TO PROPS */
+function mapStateToProps(state) {
+  console.log('mapVote', state);
+  return {
+    pair: state.vote.pair,
+    hasVoted: state.hasVoted,
+    winner: state.winner
+  }
+}
 
 
 
@@ -22,19 +35,6 @@ function winner(title) {
 
 
 
-/* MAP STATE TO PROPS */
-function mapStateToProps(state) {
-  console.log('mapVoting', state);
-  return {
-    pair: state.vote.pair,
-    hasVoted: state.hasVoted,
-    winner: state.winner
-  }
-}
-
-
-
-
 /* VOTING COMP */
 Voting.propTypes = {
   pair: PropTypes.array, 
@@ -43,20 +43,17 @@ Voting.propTypes = {
 };
 
 function Voting(props) {
-
   /* GIVE BUTTONS */
   function giveButtons() {
-    if(props.pair.length < 1)
-      return (<h1>No Entries</h1>);
-
     return props.pair.map(entry =>
       <button 
         key={entry}
         disabled={!!props.hasVoted}
+        onClick={() => props.vote(entry)}
       >
         <h1>{entry}</h1>
         {props.hasVoted === entry ?
-          <div>Voted</div> :
+          <h2>Voted</h2> :
           null
         }
       </button>
