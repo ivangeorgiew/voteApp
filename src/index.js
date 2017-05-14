@@ -23,7 +23,7 @@ function updateAll(socket) {
   };
 }
 
-const socket = io(`${location.protocol}//${location.hostname}:3000`);
+const socket = io();
 
 const store = createStore(reducer, applyMiddleware(updateAll(socket)));
 

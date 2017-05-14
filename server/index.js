@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import SocketIO from 'socket.io';
+import socketIO from 'socket.io';
 import path from 'path';
 import express from 'express';
 import { reducer } from './reducer';
@@ -31,7 +31,7 @@ const server = app.listen(port, (err) => {
   return console.log(`Listening at http://localhost:${port}`)
 });
 
-const io = new SocketIO(server);
+const io = socketIO(server);
 
 const store = createStore(reducer);
 
