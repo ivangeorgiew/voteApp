@@ -31,7 +31,7 @@ const server = app.listen(port, (err) => {
   return console.log(`Listening at http://localhost:${port}`)
 });
 
-const io = new SocketIO(server).attach(8090);
+const io = new SocketIO(server);
 
 const store = createStore(reducer);
 
