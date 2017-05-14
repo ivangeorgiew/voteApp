@@ -1,5 +1,4 @@
-//export for tests
-export { setState, next, vote, reducer };
+export { reducer };
 
 
 
@@ -7,12 +6,6 @@ export { setState, next, vote, reducer };
 /* INITIAL STATE */
 const initState = {
   entries: [
-    "A Life Less Ordinary",
-    "The Beach",
-    "28 Days Later",
-    "Millions",
-    "Sunshine",
-    "Slumdog Millionaire",
     "127 Hours",
     "Trance",
     "Steve Jobs"
@@ -67,6 +60,7 @@ function next(state) {
   copy.entries = entries.slice(2);
   copy.vote.pair = entries.slice(0, 2);
   copy.vote.tally = { [entries[0]]: 0, [entries[1]]: 0 };
+  copy.hasVoted = '';
 
   return Object.assign({}, state, copy);
 }

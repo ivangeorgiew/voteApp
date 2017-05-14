@@ -15,37 +15,38 @@ import Results from './components/Results';
 
 
 /* STORE AND SOCKET */
+
+//FOR DEVELOPMENT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//const socket = io(`${location.protocol}//${location.hostname}:3000`);
+
+const socket = io();
+
 function updateAll(socket) {
   return (store) => (next) => (action) => {
-    if(action.meta && action.meta.remote)
+    if(action.reload)
       socket.emit('action', action);
     return next(action);
   };
 }
 
-const socket = io();
-
 const store = createStore(reducer, applyMiddleware(updateAll(socket)));
 
 socket.on('state', state => {
   store.dispatch(setState(state));
-  render();
 });
 
 
 
 
 /* RENDER */
-function render() {
-  return ReactDOM.render(
-    <Provider store={store}>
-      <HashRouter>
-        <div>
-          <Route exact path='/' component={Voting}/>
-          <Route path='/results' component={Results}/>
-        </div>
-      </HashRouter>
-    </Provider>,
-    document.getElementById('root')
-  );
-}
+ReactDOM.render(
+  <Provider store={store}>
+    <HashRouter>
+      <div>
+        <Route exact path='/' component={Voting}/>
+        <Route path='/results' component={Results}/>
+      </div>
+    </HashRouter>
+  </Provider>,
+  document.getElementById('root')
+);

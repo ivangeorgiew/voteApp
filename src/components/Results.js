@@ -12,7 +12,6 @@ export default connect(mapStateToProps, actions)(Results);
 
 /* MAP STATE TO PROPS */
 function mapStateToProps(state) {
-  console.log('mapRes', state);
   return {
     pair: state.vote.pair,
     tally: state.vote.tally,
@@ -31,7 +30,6 @@ Results.propTypes = {
 }
 
 function Results(props) {
-
   /* GIVE PAIR */
   function givePair() {
     return props.pair.map(entry => {
@@ -54,7 +52,7 @@ function Results(props) {
           {givePair()}
         </div>
         <div className='management'>
-          <button className='next' onClick={props.next}>
+          <button className='next' onClick={() => props.next()}>
             Next
           </button>
         </div>

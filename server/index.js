@@ -20,10 +20,7 @@ app.get('/', (req, res) =>
   res.sendFile(path.join(publicPath, 'index.html'))
 );
 
-
-
-
-/* INITIALIZING SERVER */
+//const for socket.io
 const server = app.listen(port, (err) => {
   if(err)
     return console.log(err);
@@ -31,19 +28,24 @@ const server = app.listen(port, (err) => {
   return console.log(`Listening at http://localhost:${port}`)
 });
 
-const io = socketIO(server);
 
+
+
+/* INITIALIZING SERVER */
+const io = socketIO(server);
 const store = createStore(reducer);
 
 //gets state on it being changed
 store.subscribe(() => {
   console.log('SUBSCRIBTION!');
-  console.log(store.getState());
+
+  //when distatching store on server 
   io.emit('state', store.getState())
 });
 
 io.on('connection', (socket) => {
   console.log('CONNECTION!');
+
   //emits state after connecting
   socket.emit('state', store.getState());
 

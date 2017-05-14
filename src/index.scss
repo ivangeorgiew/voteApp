@@ -82,7 +82,7 @@ body {
 }
 
 .results .tally h1 {
-  width: 25%;
+  font-size: 1.8rem;
 }
 .results .tally .voteVisualization {
   height: 50px;
@@ -102,9 +102,7 @@ body {
 
 .results .management {
   display: flex;
-
-  height: 2em;
-  border-top: 1px solid #aaa;
+  height: 5em;
 }
 
 .results .management button {
@@ -114,6 +112,7 @@ body {
 }
 .results .management .next {
   flex: 1;
+  font-size: 30px;
 }
 
 /* Winner View */
@@ -121,4 +120,13 @@ body {
 .winner {
   font-size: 4rem;
   text-align: center;
+}
+
+button:disabled {
+  color: black;
+}
+
+.chosenOne:disabled {
+  background-color: white;
+  color: black;
 }

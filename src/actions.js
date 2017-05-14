@@ -1,4 +1,4 @@
-export { setState, vote };
+export { setState, vote, next };
 
 
 
@@ -13,5 +13,13 @@ function setState(state) {
 
 /* VOTE */
 function vote(entry) {
-  return { meta: {remote: true}, type: 'VOTE', entry };
+  return { reload: true, type: 'VOTE', entry };
+}
+
+
+
+
+/* NEXT */
+function next() {
+  return { reload: true, type: 'NEXT'}; 
 }

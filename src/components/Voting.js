@@ -12,7 +12,6 @@ export default connect(mapStateToProps, actions)(Voting);
 
 /* MAP STATE TO PROPS */
 function mapStateToProps(state) {
-  console.log('mapVote', state);
   return {
     pair: state.vote.pair,
     hasVoted: state.hasVoted,
@@ -48,14 +47,13 @@ function Voting(props) {
     return props.pair.map(entry =>
       <button 
         key={entry}
+        className={props.hasVoted === entry ? 'chosenOne' : ''}
         disabled={!!props.hasVoted}
         onClick={() => props.vote(entry)}
       >
         <h1>{entry}</h1>
         {props.hasVoted === entry ?
-          <h2>Voted</h2> :
-          null
-        }
+          <h2>Voted</h2> : null}
       </button>
     );
   }
