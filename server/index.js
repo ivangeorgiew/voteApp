@@ -8,7 +8,7 @@ import { reducer } from './reducer';
 
 
 /* EXPRESS SETUP */
-const port = process.env.PORT || 3000;
+//const port = process.env.PORT || 3000;
 const app = express();
 const publicPath = path.join(__dirname, '../public');
 
@@ -24,11 +24,11 @@ app.get('/', (req, res) =>
 
 
 /* INITIALIZING SERVER */
-const server = app.listen(port, (err) => {
+const server = app.listen(PORT, (err) => {
   if(err)
     return console.log(err);
 
-  return console.log(`Listening at http://localhost:${port}`)
+  return console.log(`Listening at http://localhost:${PORT}`)
 });
 
 const io = socketIO(server);
