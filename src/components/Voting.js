@@ -23,10 +23,20 @@ function mapStateToProps(state) {
 
 
 /* WINNER */
-function winner(title) {
+function winner(props) {
   return (
-    <div className='winner'>
-      Winner is {title}
+    <div className='results'>
+      <div className='winner'>
+        Winner is {props.winner}
+      </div>
+      <div className='management'>
+        <button 
+          className='next' 
+          onClick={() => props.restart()}
+        >
+          Restart
+        </button>
+      </div>
     </div>
   );
 }
@@ -61,7 +71,7 @@ function Voting(props) {
   /* RETURN COMP */
   return (
     props.winner ?
-      winner(props.winner) :
+      winner(props) :
       <div className='voting'>
         {giveButtons()}
       </div>

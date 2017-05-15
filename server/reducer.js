@@ -72,13 +72,14 @@ function next(state) {
 function vote(state, entry) {
   const copy = Object.assign({}, state);
 
-  if(copy.vote.tally.hasOwnProperty(entry))
+  if(copy.vote.tally.hasOwnProperty(entry)){
     copy.vote.tally[entry]++; 
-
-  copy.hasVoted = entry;
+    copy.hasVoted = entry;
+  }
 
   return Object.assign({}, state, copy);
 }
+
 
 
 
@@ -86,11 +87,14 @@ function vote(state, entry) {
 function reducer(state = initState, action) {
   switch(action.type) {
     case 'SET_STATE':
+      console.log('set', state, action.state);
       return setState(state, action.state);
     case 'NEXT':
       return next(state);
     case 'VOTE':
       return vote(state, action.entry);
+    case 'RESTART':
+      return setState(state, initState);
     default:
       return state;
   }

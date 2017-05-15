@@ -46,13 +46,16 @@ function Results(props) {
   /* RETURN COMP */
   return (
     props.winner ? 
-      winner(props.winner) :
+      winner(props) :
       <div className='results'>
         <div className='tally'>
           {givePair()}
         </div>
         <div className='management'>
-          <button className='next' onClick={() => props.next()}>
+          <button 
+            className='next' 
+            onClick={() => props.next()}
+          >
             Next
           </button>
         </div>

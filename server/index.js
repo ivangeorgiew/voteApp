@@ -35,12 +35,11 @@ const server = app.listen(port, (err) => {
 const io = socketIO(server);
 const store = createStore(reducer);
 
-//gets state on it being changed
 store.subscribe(() => {
   console.log('SUBSCRIBTION!');
 
-  //when distatching store on server 
-  io.emit('state', store.getState())
+  //give state to all connections  
+  io.emit('state', store.getState());
 });
 
 io.on('connection', (socket) => {
@@ -50,7 +49,9 @@ io.on('connection', (socket) => {
   socket.emit('state', store.getState());
 
   //when any user does an action
-  socket.on('action', store.dispatch.bind(store));
+  socket.on('action', action => {
+    store.dispatch(action)
+  });
 });
 
 

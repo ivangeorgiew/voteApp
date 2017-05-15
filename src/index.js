@@ -17,9 +17,9 @@ import Results from './components/Results';
 /* STORE AND SOCKET */
 
 //FOR DEVELOPMENT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//const socket = io(`${location.protocol}//${location.hostname}:3000`);
+const socket = io(`${location.protocol}//${location.hostname}:3000`);
 
-const socket = io();
+//const socket = io();
 
 function updateAll(socket) {
   return (store) => (next) => (action) => {
@@ -31,9 +31,7 @@ function updateAll(socket) {
 
 const store = createStore(reducer, applyMiddleware(updateAll(socket)));
 
-socket.on('state', state => {
-  store.dispatch(setState(state));
-});
+socket.on('state', state => store.dispatch(setState(state)));
 
 
 

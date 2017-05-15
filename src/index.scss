@@ -21,10 +21,8 @@ body {
 
 .voting button {
   flex: 1 0 0;
-
   background-color: #673AB7;
   border-width: 0;
-  transition: 0.5s;
 }
 .voting button:first-child {
   border-bottom: 1px solid white;
@@ -113,6 +111,7 @@ body {
 .results .management .next {
   flex: 1;
   font-size: 30px;
+  float: bottom;
 }
 
 /* Winner View */

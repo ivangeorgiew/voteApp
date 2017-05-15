@@ -1,4 +1,4 @@
-export { setState, vote, next };
+export { setState, vote, next, restart };
 
 
 
@@ -21,5 +21,13 @@ function vote(entry) {
 
 /* NEXT */
 function next() {
-  return { reload: true, type: 'NEXT'}; 
+  return { reload: true, type: 'NEXT' }; 
+}
+
+
+
+
+/* RESTART */
+function restart() {
+  return { reload: true, type: 'RESTART' };
 }

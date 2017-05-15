@@ -2,7 +2,7 @@
   "name": "voteApp",
   "version": "1.0.0",
   "description": "A react-redux voting app.",
-  "main": "src/index.js",
+  "main": "server/index.js",
   "author": "Ivan Georgiev",
   "license": "MIT",
   "scripts": {
