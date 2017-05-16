@@ -17,7 +17,7 @@ import Results from './components/Results';
 function emitAction(socket) {
   return (store) => (next) => (action) => {
     if(action.reload)
-      socket.emit('action' action);
+      socket.emit('action', action);
     return next(action);
   };
 }
@@ -28,8 +28,8 @@ function emitAction(socket) {
 /* STORE AND SOCKET */
 
 //FOR DEVELOPMENT switch to first one
-const socket = io(`${location.protocol}//${location.hostname}:3000`);
-//--const socket = io();
+//const socket = io(`${location.protocol}//${location.hostname}:3000`);
+const socket = io();
 
 //create store 
 const store = createStore(reducer, applyMiddleware(emitAction(socket)));
