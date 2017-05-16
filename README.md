@@ -2,7 +2,7 @@
 
 A react-redux voting app.
 It's uploaded at: 
-http://vote-app-321.herokuapp.com/
+http://vote-appp.herokuapp.com/
 
 
 ### Installation
