@@ -29,8 +29,10 @@ function updateAll(socket) {
   };
 }
 
+//create store and add middleware
 const store = createStore(reducer, applyMiddleware(updateAll(socket)));
 
+//on state being changed at server change the client state
 socket.on('state', state => store.dispatch(setState(state)));
 
 

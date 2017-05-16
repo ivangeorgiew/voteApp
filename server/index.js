@@ -22,10 +22,8 @@ app.get('/', (req, res) =>
 
 //const for socket.io
 const server = app.listen(port, (err) => {
-  if(err)
-    return console.log(err);
-
-  return console.log(`Listening at http://localhost:${port}`)
+  return (err) ? console.log(err) :
+    console.log(`Listening at http://localhost:${port}`) 
 });
 
 
@@ -35,13 +33,6 @@ const server = app.listen(port, (err) => {
 const io = socketIO(server);
 const store = createStore(reducer);
 
-store.subscribe(() => {
-  console.log('SUBSCRIBTION!');
-
-  //give state to all connections  
-  io.emit('state', store.getState());
-});
-
 io.on('connection', (socket) => {
   console.log('CONNECTION!');
 
@@ -50,7 +41,8 @@ io.on('connection', (socket) => {
 
   //when any user does an action
   socket.on('action', action => {
-    store.dispatch(action)
+    store.dispatch(action);
+    io.emit('state', store.getState());
   });
 });
 

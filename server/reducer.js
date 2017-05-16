@@ -31,9 +31,12 @@ function setState(state, newState) {
 
 /* NEXT */
 function next(state) {
-  const copy = Object.assign({}, state);
+  const copy = JSON.parse(JSON.stringify(state));
 
   function getWinners() {
+    if(!copy.vote.pair)
+      return [];
+
     const vote = Object.assign({}, copy.vote);
     const [a, b] = vote.pair;
     
@@ -70,7 +73,7 @@ function next(state) {
 
 /* VOTE */
 function vote(state, entry) {
-  const copy = Object.assign({}, state);
+  const copy = JSON.parse(JSON.stringify(state));
 
   if(copy.vote.tally.hasOwnProperty(entry)){
     copy.vote.tally[entry]++; 
@@ -87,14 +90,13 @@ function vote(state, entry) {
 function reducer(state = initState, action) {
   switch(action.type) {
     case 'SET_STATE':
-      console.log('set', state, action.state);
       return setState(state, action.state);
     case 'NEXT':
       return next(state);
     case 'VOTE':
       return vote(state, action.entry);
     case 'RESTART':
-      return setState(state, initState);
+      return initState;
     default:
       return state;
   }
