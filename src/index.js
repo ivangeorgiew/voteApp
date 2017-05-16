@@ -5,32 +5,34 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import io from 'socket.io-client';
 
-import { reducer } from '../server/reducer';
 import { setState } from './actions';
-import './index.scss';
+import { reducer } from '../server/reducer';
 import Voting from './components/Voting';
 import Results from './components/Results';
 
 
 
 
-/* STORE AND SOCKET */
-
-//FOR DEVELOPMENT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-const socket = io(`${location.protocol}//${location.hostname}:3000`);
-
-//const socket = io();
-
-function updateAll(socket) {
+/* FUNCTIONS */
+function emitAction(socket) {
   return (store) => (next) => (action) => {
     if(action.reload)
-      socket.emit('action', action);
+      socket.emit('action' action);
     return next(action);
   };
 }
 
-//create store and add middleware
-const store = createStore(reducer, applyMiddleware(updateAll(socket)));
+
+
+
+/* STORE AND SOCKET */
+
+//FOR DEVELOPMENT switch to first one
+const socket = io(`${location.protocol}//${location.hostname}:3000`);
+//--const socket = io();
+
+//create store 
+const store = createStore(reducer, applyMiddleware(emitAction(socket)));
 
 //on state being changed at server change the client state
 socket.on('state', state => store.dispatch(setState(state)));

@@ -13,9 +13,9 @@ export default connect(mapStateToProps, actions)(Results);
 /* MAP STATE TO PROPS */
 function mapStateToProps(state) {
   return {
-    pair: state.vote.pair,
-    tally: state.vote.tally,
-    winner: state.winner
+    pair: Object.keys(state.vote || {}),
+    tally: state.vote || {},
+    winner: state.winner || ''
   }
 }
 

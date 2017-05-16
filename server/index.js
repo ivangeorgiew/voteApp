@@ -42,6 +42,7 @@ io.on('connection', (socket) => {
   //when any user does an action
   socket.on('action', action => {
     store.dispatch(action);
+    //emmits to all sockets
     io.emit('state', store.getState());
   });
 });

@@ -1,12 +1,4 @@
-export { setState, vote, next, restart };
-
-
-
-
-/* SET STATE */
-function setState(state) {
-  return { type: 'SET_STATE', state };
-}
+export { vote, next, restart, setState };
 
 
 
@@ -28,6 +20,14 @@ function next() {
 
 
 /* RESTART */
-function restart() {
-  return { reload: true, type: 'RESTART' };
+function restart(entries) {
+  return { reload: true, type: 'RESTART' , entries};
+}
+
+
+
+
+/* SET STATE */
+function setState(state) {
+  return { type: 'SET_STATE', state };
 }
