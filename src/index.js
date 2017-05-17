@@ -20,8 +20,8 @@ import Results from './components/Results';
 /* STORE AND SOCKET */
 
 // FOR DEVELOPMENT switch to first one
-const socket = io(`${location.protocol}//${location.hostname}:3000`);
-//const socket = io();
+const port = process.env.PORT || 3000;
+const socket = io(`${location.protocol}//${location.hostname}:${port}`);
 
 // emit actions to server
 function emitAction(socket) {
