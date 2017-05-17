@@ -1,11 +1,12 @@
-export { vote, next, restart, setState };
+export { vote, next, restart, setState, setClientId };
 
 
 
 
 /* VOTE */
 function vote(entry) {
-  return { reload: true, type: 'VOTE', entry };
+  const clientId = sessionStorage.getItem('clientId');
+  return { reload: true, type: 'VOTE', entry, clientId };
 }
 
 
@@ -30,4 +31,12 @@ function restart(entries) {
 /* SET STATE */
 function setState(state) {
   return { type: 'SET_STATE', state };
+}
+
+
+
+
+/* SET CLIENT ID */
+function setClientId(clientId) {
+  return { type: 'SET_CLIENT_ID', clientId };
 }

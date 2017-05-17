@@ -4,8 +4,9 @@ import { HashRouter, Route } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import io from 'socket.io-client';
+import uuidV4 from 'uuid/v4';
 
-import { setState } from './actions';
+import { setState, setClientId } from './actions';
 import { reducer } from '../server/reducer';
 import Voting from './components/Voting';
 import Results from './components/Results';
@@ -13,7 +14,16 @@ import Results from './components/Results';
 
 
 
-/* FUNCTIONS */
+
+
+
+/* STORE AND SOCKET */
+
+// FOR DEVELOPMENT switch to first one
+const socket = io(`${location.protocol}//${location.hostname}:3000`);
+//const socket = io();
+
+// emit actions to server
 function emitAction(socket) {
   return (store) => (next) => (action) => {
     if(action.reload)
@@ -22,20 +32,33 @@ function emitAction(socket) {
   };
 }
 
-
-
-
-/* STORE AND SOCKET */
-
-//FOR DEVELOPMENT switch to first one
-//const socket = io(`${location.protocol}//${location.hostname}:3000`);
-const socket = io();
-
-//create store 
+// create store 
 const store = createStore(reducer, applyMiddleware(emitAction(socket)));
 
-//on state being changed at server change the client state
-socket.on('state', state => store.dispatch(setState(state)));
+// on state being changed at server, change the client state
+socket.on('state', state => {
+  if(state.voterId === sessionStorage.getItem('clientId')) {
+    store.dispatch(setState(Object.assign({}, state, {
+      hasVoted: state.voteEntry
+    })));
+  }
+  else  {
+    const copy = Object.assign({}, state);
+    if(copy.voteEntry !== '')
+      delete copy.hasVoted;
+    store.dispatch(setState(copy))
+  }
+});
+
+
+
+
+/* SET ID FOR EVERY TAB */
+if(!sessionStorage.getItem('clientId'))
+  sessionStorage.setItem('clientId', uuidV4());
+
+store.dispatch(setClientId(sessionStorage.getItem('clientId')));
+
 
 
 

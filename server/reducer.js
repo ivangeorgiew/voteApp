@@ -53,6 +53,7 @@ function next(state) {
 
   copy.entries = entries.slice(2);
   copy.vote = { [entries[0]]: 0, [entries[1]]: 0 };
+  copy.voteEntry = '';
   copy.winner = '';
   copy.hasVoted = '';
 
@@ -63,12 +64,13 @@ function next(state) {
 
 
 /* VOTE */
-function vote(state, entry) {
+function vote(state, entry, clientId) {
   const copy = JSON.parse(JSON.stringify(state));
 
   if(copy.vote.hasOwnProperty(entry)){
     copy.vote[entry]++; 
-    copy.hasVoted = entry;
+    copy.voterId = clientId;
+    copy.voteEntry = entry;
   }
 
   return Object.assign({}, state, copy);
@@ -82,10 +84,12 @@ function reducer(state = initState, action) {
   switch(action.type) {
     case 'SET_STATE':
       return setState(state, action.state);
+    case 'SET_CLIENT_ID':
+      return setState(state, {clientId: action.clientId});
     case 'NEXT':
       return next(state);
     case 'VOTE':
-      return vote(state, action.entry);
+      return vote(state, action.entry, action.clientId);
     case 'RESTART':
       return (action.entries) ?
         next({entries: action.entries}) :

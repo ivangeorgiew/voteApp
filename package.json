@@ -9,7 +9,7 @@
     "build": "cross-env NODE_ENV=production webpack --config ./webpack.prod.config.js --progress --colors",
     "server": "nodemon server/index.js --exec babel-node --presets latest,react",
     "start": "babel-node server/index.js",
-    "dev": "webpack-dev-server --history-api-fallback --open"
+    "dev": "webpack-dev-server --history-api-fallback"
   },
   "repository": {
     "type": "git",
