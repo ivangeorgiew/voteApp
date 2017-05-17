@@ -37,17 +37,15 @@ const store = createStore(reducer, applyMiddleware(emitAction(socket)));
 
 // on state being changed at server, change the client state
 socket.on('state', state => {
-  if(state.voterId === sessionStorage.getItem('clientId')) {
-    store.dispatch(setState(Object.assign({}, state, {
-      hasVoted: state.voteEntry
-    })));
-  }
-  else  {
-    const copy = Object.assign({}, state);
-    if(copy.voteEntry !== '')
-      delete copy.hasVoted;
-    store.dispatch(setState(copy))
-  }
+  //for different tabs
+  const vote = state.voters ?
+    state.voters[sessionStorage.getItem('clientId')] :
+    '';
+
+  store.dispatch(setState(Object.assign({}, state, {
+    hasVoted: vote
+  })));
+
 });
 
 

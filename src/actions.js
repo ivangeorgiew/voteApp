@@ -5,7 +5,9 @@ export { vote, next, restart, setState, setClientId };
 
 /* VOTE */
 function vote(entry) {
+  //for different tabs
   const clientId = sessionStorage.getItem('clientId');
+
   return { reload: true, type: 'VOTE', entry, clientId };
 }
 

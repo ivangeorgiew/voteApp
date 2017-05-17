@@ -11,7 +11,9 @@ const initState = {
     "127 Hours",
     "Trance",
     "Steve Jobs"
-  ]
+  ],
+  //for different tabs
+  voters: {}
 };
 
 
@@ -53,9 +55,12 @@ function next(state) {
 
   copy.entries = entries.slice(2);
   copy.vote = { [entries[0]]: 0, [entries[1]]: 0 };
-  copy.voteEntry = '';
   copy.winner = '';
   copy.hasVoted = '';
+
+  //for different tabs
+  for(const prop in copy.voters)
+    copy.voters[prop] = '';
 
   return Object.assign({}, state, copy);
 }
@@ -69,8 +74,8 @@ function vote(state, entry, clientId) {
 
   if(copy.vote.hasOwnProperty(entry)){
     copy.vote[entry]++; 
-    copy.voterId = clientId;
-    copy.voteEntry = entry;
+    //for different tabs
+    copy.voters[clientId] = entry; 
   }
 
   return Object.assign({}, state, copy);
