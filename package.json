@@ -8,7 +8,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config ./webpack.prod.config.js --progress --colors",
     "server": "nodemon server/index.js --exec babel-node --presets latest,react",
-    "postinstall": "yarn install && yarn run build",
+    "postinstall": "cross-env NODE_ENV=production webpack --config ./webpack.prod.config.js",
     "start": "babel-node server/index.js",
     "dev": "webpack-dev-server --history-api-fallback"
   },
