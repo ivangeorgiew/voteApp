@@ -8,6 +8,7 @@ import uuidV4 from 'uuid/v4';
 
 import { setState, setClientId } from './actions';
 import { reducer } from '../server/reducer';
+import App from './components/App';
 import Voting from './components/Voting';
 import Results from './components/Results';
 
@@ -66,7 +67,8 @@ ReactDOM.render(
   <Provider store={store}>
     <HashRouter>
       <div>
-        <Route exact path='/' component={Voting}/>
+        <Route exact path='/' component={App}/>
+        <Route path='/voting' component={Voting}/>
         <Route path='/results' component={Results}/>
       </div>
     </HashRouter>

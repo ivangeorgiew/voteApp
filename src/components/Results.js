@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import '../index.scss';
-import { winner } from './Voting';
+import Winner from './Winner';
 
 export default connect(mapStateToProps, actions)(Results);
 
@@ -24,9 +24,10 @@ function mapStateToProps(state) {
 
 /* RESULTS COMP */
 Results.propTypes = {
-  pair: PropTypes.array,
-  tally: PropTypes.object,
-  winner: PropTypes.string
+  pair: PropTypes.array.isRequired,
+  tally: PropTypes.object.isRequired,
+  winner: PropTypes.string.isRequired,
+  next: PropTypes.func.isRequired
 }
 
 function Results(props) {
@@ -46,7 +47,7 @@ function Results(props) {
   /* RETURN COMP */
   return (
     props.winner ? 
-      winner(props) :
+      <Winner /> :
       <div className='results'>
         <div className='tally'>
           {givePair()}

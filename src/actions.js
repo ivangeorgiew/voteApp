@@ -23,8 +23,8 @@ function next() {
 
 
 /* RESTART */
-function restart(entries) {
-  return { reload: true, type: 'RESTART' , entries};
+function restart() {
+  return { reload: true, type: 'RESTART' };
 }
 
 

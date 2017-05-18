@@ -34,8 +34,6 @@ const io = socketIO(server);
 const store = createStore(reducer);
 
 io.on('connection', (socket) => {
-  console.log('CONNECTION!');
-
   //emits state after connecting
   socket.emit('state', store.getState());
 

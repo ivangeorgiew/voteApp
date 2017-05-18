@@ -31,6 +31,7 @@ function setState(state, newState) {
 function next(state) {
   const copy = JSON.parse(JSON.stringify(state));
 
+  //returns both if votes are equal
   function getWinners(vote) {
     if(!vote)
       return [];
@@ -49,9 +50,9 @@ function next(state) {
   const entries = copy.entries
   .concat(getWinners(copy.vote));
 
-  if(entries.length === 1) {
+  //return only winner if it's the end 
+  if(entries.length === 1)
     return {winner: entries[0]};
-  }
 
   copy.entries = entries.slice(2);
   copy.vote = { [entries[0]]: 0, [entries[1]]: 0 };
@@ -74,6 +75,7 @@ function vote(state, entry, clientId) {
 
   if(copy.vote.hasOwnProperty(entry)){
     copy.vote[entry]++; 
+
     //for different tabs
     copy.voters[clientId] = entry; 
   }
@@ -96,9 +98,7 @@ function reducer(state = initState, action) {
     case 'VOTE':
       return vote(state, action.entry, action.clientId);
     case 'RESTART':
-      return (action.entries) ?
-        next({entries: action.entries}) :
-        next(initState);
+      return next(initState);
     default:
       return next(state);
   }

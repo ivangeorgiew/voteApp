@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import '../index.scss';
+import Winner from './Winner';
 
-export { winner };
 export default connect(mapStateToProps, actions)(Voting);
 
 
@@ -22,33 +22,11 @@ function mapStateToProps(state) {
 
 
 
-/* WINNER */
-function winner(props) {
-  return (
-    <div className='results'>
-      <div className='winner'>
-        Winner is {props.winner}
-      </div>
-      <div className='management'>
-        <button 
-          className='next' 
-          onClick={() => props.restart()}
-        >
-          Restart
-        </button>
-      </div>
-    </div>
-  );
-}
-
-
-
-
 /* VOTING COMP */
 Voting.propTypes = {
-  pair: PropTypes.array, 
-  hasVoted: PropTypes.string,
-  winner: PropTypes.string
+  pair: PropTypes.array.isRequired, 
+  hasVoted: PropTypes.string.isRequired,
+  vote: PropTypes.func.isRequired
 };
 
 function Voting(props) {
@@ -71,7 +49,7 @@ function Voting(props) {
   /* RETURN COMP */
   return (
     props.winner ?
-      winner(props) :
+      <Winner /> :
       <div className='voting'>
         {giveButtons()}
       </div>
