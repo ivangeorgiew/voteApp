@@ -5,7 +5,7 @@ import * as actions from '../actions';
 import '../index.scss';
 import Winner from './Winner';
 
-export default connect(mapStateToProps, actions)(Voting);
+export default connect(mapStateToProps)(Voting);
 
 
 
@@ -15,7 +15,8 @@ function mapStateToProps(state) {
   return {
     pair: Object.keys(state.vote || {}),
     hasVoted: state.hasVoted || '',
-    winner: state.winner || ''
+    winner: state.winner || '',
+    vote: actions.vote
   }
 }
 
@@ -26,6 +27,7 @@ function mapStateToProps(state) {
 Voting.propTypes = {
   pair: PropTypes.array.isRequired, 
   hasVoted: PropTypes.string.isRequired,
+  winner: PropTypes.string.isRequired,
   vote: PropTypes.func.isRequired
 };
 
@@ -37,7 +39,7 @@ function Voting(props) {
         key={entry}
         className={props.hasVoted === entry ? 'chosenOne' : ''}
         disabled={!!props.hasVoted}
-        onClick={() => props.vote(entry)}
+        onClick={() => props.dispatch(props.vote(entry))}
       >
         <h1>{entry}</h1>
         {props.hasVoted === entry ?

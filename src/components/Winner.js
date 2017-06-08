@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import '../index.scss';
 
-export default connect(mapStateToProps, actions)(Winner);
+export default connect(mapStateToProps)(Winner);
 
 
 
@@ -13,6 +13,7 @@ export default connect(mapStateToProps, actions)(Winner);
 function mapStateToProps(state) {
   return {
     winner: state.winner || '',
+    restart: actions.restart
   }
 }
 
@@ -36,7 +37,7 @@ function Winner(props) {
       <div className='management'>
         <button 
           className='next' 
-          onClick={() => props.restart()}
+          onClick={() => props.dispatch(props.restart())}
         >
           Restart
         </button>

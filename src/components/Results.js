@@ -5,7 +5,7 @@ import * as actions from '../actions';
 import '../index.scss';
 import Winner from './Winner';
 
-export default connect(mapStateToProps, actions)(Results);
+export default connect(mapStateToProps)(Results);
 
 
 
@@ -15,7 +15,8 @@ function mapStateToProps(state) {
   return {
     pair: Object.keys(state.vote || {}),
     tally: state.vote || {},
-    winner: state.winner || ''
+    winner: state.winner || '',
+    next: actions.next
   }
 }
 
@@ -55,7 +56,7 @@ function Results(props) {
         <div className='management'>
           <button 
             className='next' 
-            onClick={() => props.next()}
+            onClick={() => props.dispatch(props.next())}
           >
             Next
           </button>
